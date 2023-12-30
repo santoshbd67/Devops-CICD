@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('git-checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/jaiswaladi246/Devops-CICD.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/santoshbd67/Devops-CICD.git'
             }
         }
         
