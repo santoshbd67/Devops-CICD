@@ -4,6 +4,9 @@ pipeline {
         jdk 'jdk11'
         maven 'maven3'
     }
+    environment{
+	    SCANNER_HOME= tool "sonar-scanner"
+    }
    
 
     stages {
@@ -19,7 +22,14 @@ pipeline {
             }
         }
         
-       	
+       	stage('sonarqube analysis') {
+	   steps {
+		withSonarQubeEnv('sonar-scanner') {
+			sh 'mvn sonar:sonar'
+    		    
+		}
+	   }
+	}
 	
         stage('Code-Build') {
             steps {
