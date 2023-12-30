@@ -36,7 +36,23 @@ pipeline {
                sh "mvn clean install"
             }
         }
-       
-        
+	    
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    def dockerImage = docker.build("cicd:latest")
+                }
+            }
+        }
+        stage('Push to Docker Registry') {
+            steps {
+                script {
+                    // Push the Docker image to a Docker registry
+                    docker.withRegistry('santoshbd67', 'docker_id') {
+                        dockerImage.push()
+                    }
+                }
+            }
     }
 }
